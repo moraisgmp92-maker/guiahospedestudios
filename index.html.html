@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lindo Studio Frente Mar — Balneário Caravelas, Matinhos/PR</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ocean:#1a6fa8;--ocean-light:#2196f3;--ocean-dark:#0d4a73;
+  --sand:#f5e6c8;--sand-dark:#e8d4a0;--white:#fff;--dark:#1a1a2e;
+  --gray:#6b7280;--gray-light:#f3f4f6;--success:#10b981;
+  --radius:12px;--radius-lg:20px;--shadow:0 4px 20px rgba(0,0,0,.12);
+  --shadow-hover:0 8px 32px rgba(0,0,0,.2);
+  --transition:.3s ease;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--dark);background:#fff;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.section{padding:70px 0}
+.section-title{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;color:var(--dark)}
+.section-subtitle{color:var(--gray);font-size:1rem;margin-bottom:40px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--ocean);color:#fff;padding:5px 14px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.badge-gold{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:var(--transition)}
+.btn-primary{background:linear-gradient(135deg,var(--ocean),var(--ocean-light));color:#fff;box-shadow:0 4px 15px rgba(26,111,168,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(26,111,168,.5)}
+.btn-secondary{background:transparent;color:var(--ocean);border:2px solid var(--ocean)}
+.btn-secondary:hover{background:var(--ocean);color:#fff}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 4px 15px rgba(37,211,102,.4)}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.5)}
+
+/* ── NAVBAR ── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;transition:var(--transition);background:transparent}
+#navbar.scrolled{background:rgba(13,74,115,.96);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.2)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{color:#fff;font-weight:700;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.nav-logo span{font-size:1.4rem}
+.nav-links{display:flex;gap:8px;flex-wrap:wrap}
+.nav-links a{color:rgba(255,255,255,.9);font-size:.82rem;padding:6px 12px;border-radius:20px;transition:var(--transition);white-space:nowrap}
+.nav-links a:hover{background:rgba(255,255,255,.15);color:#fff}
+.nav-cta{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:7px 16px;border-radius:20px;font-size:.82rem;font-weight:600;transition:var(--transition);white-space:nowrap;cursor:pointer}
+.nav-cta:hover{background:#fff;color:var(--ocean)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:var(--transition)}
+@media(max-width:768px){
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(13,74,115,.97);flex-direction:column;padding:20px;gap:4px}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:10px 16px;border-radius:8px;font-size:.9rem}
+  .nav-hamburger{display:flex}
+  .nav-cta{display:none}
+}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ocean-dark)}
+.hero-bg{position:absolute;inset:0;background:url('https://a0.muscache.com/im/pictures/hosting/Hosting-52125850/original/795d5294-120d-4224-9f65-f323659b298a.png?im_w=1200') center/cover no-repeat;opacity:.65}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,74,115,.7) 0%,rgba(13,74,115,.3) 50%,rgba(0,0,0,.5) 100%)}
+.hero-content{position:relative;text-align:center;color:#fff;padding:100px 20px 60px;max-width:800px;margin:0 auto}
+.hero-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.hero-title{font-size:clamp(2.2rem,7vw,4rem);font-weight:800;line-height:1.15;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hero-subtitle{font-size:clamp(1rem,2.5vw,1.3rem);opacity:.92;margin-bottom:12px;font-weight:300}
+.hero-location{display:inline-flex;align-items:center;gap:6px;font-size:.95rem;opacity:.85;margin-bottom:36px}
+.hero-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-bottom:40px}
+.hero-stat{text-align:center}
+.hero-stat-value{font-size:1.8rem;font-weight:800;line-height:1}
+.hero-stat-label{font-size:.75rem;opacity:.8;text-transform:uppercase;letter-spacing:.5px}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;cursor:pointer}
+.hero-scroll svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2;opacity:.8}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ── GALLERY ── */
+#gallery{padding:70px 0;background:var(--gray-light)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-radius:var(--radius-lg);overflow:hidden}
+.gallery-grid .g-hero{grid-column:1/3;grid-row:1/3;aspect-ratio:4/3}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s ease}
+.gallery-item:hover img{transform:scale(1.07)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:var(--transition)}
+.gallery-item:hover::after{background:rgba(0,0,0,.15)}
+.gallery-more{position:relative;cursor:pointer}
+.gallery-more::before{content:'Ver todas as fotos';position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;z-index:2;text-align:center}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-grid .g-hero{grid-column:1/3;grid-row:auto;aspect-ratio:16/9}}
+@media(max-width:480px){.gallery-grid{grid-template-columns:1fr}.gallery-grid .g-hero{grid-column:auto;aspect-ratio:16/9}}
+/* Lightbox */
+#lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);align-items:center;justify-content:center}
+#lightbox.active{display:flex}
+.lb-img{max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain}
+.lb-close{position:absolute;top:20px;right:24px;color:#fff;font-size:2rem;cursor:pointer;line-height:1;z-index:9001;background:rgba(255,255,255,.1);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;transition:var(--transition)}
+.lb-close:hover{background:rgba(255,255,255,.2)}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);color:#fff;border:none;width:48px;height:48px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);z-index:9001}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.25)}
+.lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.9rem}
+
+/* ── ACCESS / CHECK-IN ── */
+#access{padding:70px 0;background:#fff}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.access-steps{display:flex;flex-direction:column;gap:20px}
+.access-step{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--gray-light);border-radius:var(--radius);transition:var(--transition)}
+.access-step:hover{transform:translateX(6px);box-shadow:var(--shadow)}
+.step-num{min-width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--ocean),var(--ocean-light));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.step-content h4{font-weight:600;margin-bottom:4px;color:var(--dark)}
+.step-content p{color:var(--gray);font-size:.9rem}
+.access-video-box{background:linear-gradient(135deg,var(--ocean-dark),var(--ocean));border-radius:var(--radius-lg);padding:32px;color:#fff;position:sticky;top:90px}
+.access-video-box h3{font-size:1.3rem;margin-bottom:12px}
+.access-video-box p{opacity:.85;font-size:.9rem;margin-bottom:24px}
+.video-wrapper{position:relative;padding-bottom:177.78%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,.3);margin-bottom:20px;max-width:280px;margin-left:auto;margin-right:auto}
+.video-wrapper iframe,.video-wrapper video{position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:12px;object-fit:cover}
+.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer}
+.video-placeholder svg{width:60px;height:60px;fill:rgba(255,255,255,.9)}
+.video-placeholder span{font-size:.9rem;opacity:.8}
+.btn-video{width:100%;justify-content:center;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:10px;padding:13px;font-size:.95rem;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:8px}
+.btn-video:hover{background:rgba(255,255,255,.25)}
+.checkin-times{display:flex;gap:12px;margin-top:24px}
+.time-card{flex:1;background:rgba(255,255,255,.1);border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,.2)}
+.time-card .icon{font-size:1.5rem;margin-bottom:6px}
+.time-card .time{font-size:1.4rem;font-weight:700}
+.time-card .label{font-size:.75rem;opacity:.75;text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:768px){.access-grid{grid-template-columns:1fr}.access-video-box{position:static}.checkin-times{flex-direction:column}}
+
+/* ── AMENITIES ── */
+#amenities{padding:70px 0;background:var(--gray-light)}
+.amenities-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.amen-card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:var(--transition)}
+.amen-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.amen-card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer}
+.amen-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.amen-card-header h3{font-size:1rem;font-weight:600;color:var(--dark)}
+.amen-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.amen-list li{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;color:var(--gray)}
+.amen-list li::before{content:'✓';color:var(--success);font-weight:700;flex-shrink:0}
+.amen-list li.unavail{opacity:.5}
+.amen-list li.unavail::before{content:'✗';color:#ef4444}
+.amen-tag{display:inline-flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{background:var(--gray-light);color:var(--dark);padding:4px 10px;border-radius:20px;font-size:.78rem;font-weight:500}
+.tag-ocean{background:#e0f2fe;color:var(--ocean-dark)}
+/* ── RULES ACCORDION ── */
+#rules{padding:70px 0;background:#fff}
+.accordion{display:flex;flex-direction:column;gap:8px}
+.accordion-item{border:1px solid #e5e7eb;border-radius:var(--radius);overflow:hidden}
+.accordion-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;cursor:pointer;background:#fff;transition:var(--transition);user-select:none}
+.accordion-header:hover{background:var(--gray-light)}
+.accordion-header.active{background:var(--ocean);color:#fff}
+.accordion-title{display:flex;align-items:center;gap:12px;font-weight:600;font-size:.95rem}
+.accordion-icon{font-size:1.2rem}
+.accordion-chevron{font-size:1.1rem;transition:var(--transition)}
+.accordion-header.active .accordion-chevron{transform:rotate(180deg)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.accordion-body.open{max-height:600px}
+.accordion-body-inner{padding:20px;background:#fafafa;border-top:1px solid #e5e7eb}
+.rule-list{display:flex;flex-direction:column;gap:10px}
+.rule-item{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--dark)}
+.rule-dot{width:8px;height:8px;border-radius:50%;background:var(--ocean);flex-shrink:0;margin-top:6px}
+.rule-item.important .rule-dot{background:#ef4444}
+.rule-item.important{color:#b91c1c;font-weight:500}
+
+/* ── INSTRUCTIONS ── */
+#instructions{padding:70px 0;background:var(--gray-light)}
+.instr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.instr-card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:var(--transition);position:relative;overflow:hidden}
+.instr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--ocean),var(--ocean-light))}
+.instr-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.instr-card-icon{font-size:2rem;margin-bottom:12px}
+.instr-card h3{font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--dark)}
+.instr-card p,.instr-card ul{font-size:.88rem;color:var(--gray);line-height:1.7}
+.instr-card ul{list-style:none;padding:0}
+.instr-card ul li{padding:3px 0;display:flex;gap:6px}
+.instr-card ul li::before{content:'→';color:var(--ocean);flex-shrink:0}
+.wifi-reveal{margin-top:12px}
+.wifi-btn{background:var(--gray-light);border:2px dashed var(--ocean);color:var(--ocean);border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;width:100%;text-align:center;transition:var(--transition);font-size:.9rem}
+.wifi-btn:hover{background:var(--ocean);color:#fff;border-style:solid}
+.wifi-secret{display:none;margin-top:10px;background:#e0f7fa;border:1px solid var(--ocean-light);border-radius:8px;padding:12px;text-align:center}
+.wifi-secret.visible{display:block}
+.wifi-secret .wifi-name{font-size:.8rem;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.wifi-secret .wifi-value{font-size:1.1rem;font-weight:700;color:var(--ocean-dark);word-break:break-all}
+/* ── LOCAL TIPS ── */
+#tips{padding:70px 0;background:linear-gradient(160deg,var(--ocean-dark) 0%,var(--ocean) 100%)}
+#tips .section-title,#tips .section-subtitle{color:#fff}
+#tips .section-subtitle{opacity:.8}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.tip-card{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-lg);padding:28px;color:#fff;transition:var(--transition)}
+.tip-card:hover{background:rgba(255,255,255,.18);transform:translateY(-6px)}
+.tip-card-icon{font-size:2.2rem;margin-bottom:14px}
+.tip-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.tip-card p{opacity:.85;font-size:.88rem;line-height:1.7}
+/* ── REVIEWS ── */
+#reviews{padding:70px 0;background:#fff}
+.reviews-header{display:flex;align-items:center;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.reviews-score{text-align:center;padding:24px 36px;background:var(--ocean);border-radius:var(--radius-lg);color:#fff}
+.reviews-score .score{font-size:4rem;font-weight:800;line-height:1}
+.reviews-score .stars{font-size:1.4rem;margin:4px 0}
+.reviews-score .count{font-size:.85rem;opacity:.85}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.review-card{background:var(--gray-light);border-radius:var(--radius);padding:24px;transition:var(--transition)}
+.review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.review-meta{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--ocean),var(--ocean-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem;flex-shrink:0}
+.review-name{font-weight:600;font-size:.95rem}
+.review-date{font-size:.78rem;color:var(--gray)}
+.review-stars{color:#f59e0b;font-size:.9rem;margin-bottom:10px}
+.review-text{font-size:.88rem;color:#374151;line-height:1.7;font-style:italic}
+
+/* ── CONTACT ── */
+#contact{padding:70px 0;background:var(--gray-light)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.contact-info h2{font-size:clamp(1.5rem,3.5vw,2rem);font-weight:700;margin-bottom:12px}
+.contact-info p{color:var(--gray);margin-bottom:28px;line-height:1.7}
+.contact-host{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding:20px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+.host-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--ocean),var(--ocean-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.3rem;flex-shrink:0}
+.host-info .host-name{font-weight:700;font-size:1.05rem}
+.host-info .host-role{font-size:.82rem;color:var(--gray)}
+.host-info .host-badge{font-size:.75rem;background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:20px;font-weight:600;display:inline-block;margin-top:3px}
+.contact-btns{display:flex;flex-direction:column;gap:12px}
+.contact-card{background:#fff;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-hover);text-align:center}
+.contact-card .big-icon{font-size:3rem;margin-bottom:16px}
+.contact-card h3{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.contact-card p{color:var(--gray);font-size:.9rem;margin-bottom:24px}
+.contact-links{display:flex;flex-direction:column;gap:10px}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+/* ── FOOTER ── */
+footer{background:var(--dark);color:rgba(255,255,255,.7);padding:40px 0 20px;text-align:center}
+.footer-logo{color:#fff;font-weight:700;font-size:1.2rem;margin-bottom:16px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-bottom:24px}
+.footer-links a{color:rgba(255,255,255,.6);font-size:.85rem;transition:var(--transition)}
+.footer-links a:hover{color:#fff}
+.footer-divider{height:1px;background:rgba(255,255,255,.1);margin:20px 0}
+.footer-bottom{font-size:.8rem;opacity:.5}
+/* ── BACK TO TOP ── */
+#backToTop{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:50%;background:var(--ocean);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--shadow-hover);z-index:500;transition:var(--transition)}
+#backToTop.visible{display:flex}
+#backToTop:hover{background:var(--ocean-dark);transform:translateY(-3px)}
+/* ── RESPONSIVE ── */
+@media(max-width:768px){.section{padding:50px 0}.reviews-score{width:100%;order:2}.btn{padding:11px 22px;font-size:.9rem}}
+@media(max-width:480px){.hero-stats{gap:16px}.access-steps{gap:14px}}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <div class="nav-logo"><span>🌊</span> Studio Frente Mar</div>
+    <div class="nav-hamburger" onclick="toggleNav()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#gallery" onclick="closeNav()">📷 Fotos</a>
+      <a href="#access" onclick="closeNav()">🔑 Acesso</a>
+      <a href="#amenities" onclick="closeNav()">✨ Comodidades</a>
+      <a href="#rules" onclick="closeNav()">📋 Regras</a>
+      <a href="#instructions" onclick="closeNav()">ℹ️ Instruções</a>
+      <a href="#tips" onclick="closeNav()">📍 Dicas</a>
+      <a href="#contact" onclick="closeNav()">💬 Contato</a>
+    </div>
+    <a href="https://www.airbnb.com.br/rooms/52125850" target="_blank" class="nav-cta">Reservar no Airbnb</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badges">
+      <span class="badge badge-gold">⭐ Preferido dos Hóspedes</span>
+      <span class="badge">🏡 Superhost Gabriel</span>
+    </div>
+    <h1 class="hero-title">Lindo Studio<br>Frente ao Mar</h1>
+    <p class="hero-subtitle">Vista panorâmica do oceano · Varanda com churrasqueira · Praia preservada</p>
+    <div class="hero-location">📍 Balneário Caravelas, Matinhos/PR &nbsp;·&nbsp; 110 km de Curitiba</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-value">4,97</div><div class="hero-stat-label">Avaliação</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">155</div><div class="hero-stat-label">Avaliações</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">4</div><div class="hero-stat-label">Hóspedes</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">23m²</div><div class="hero-stat-label">Área</div></div>
+    </div>
+    <div class="hero-actions">
+      <a href="#access" class="btn btn-primary">🔑 Ver como entrar no apartamento</a>
+      <a href="https://www.airbnb.com.br/rooms/52125850" target="_blank" class="btn btn-secondary" style="border-color:rgba(255,255,255,.7);color:#fff">Reservar agora</a>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px">
+      <div class="badge" style="margin-bottom:10px">📷 Galeria</div>
+      <h2 class="section-title">Conheça o Espaço</h2>
+      <p class="section-subtitle">32 fotos reais do apartamento e da vista para o mar</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item g-hero" onclick="openLB(0)"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-52125850/original/795d5294-120d-4224-9f65-f323659b298a.png?im_w=1200" alt="Vista principal" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLB(1)"><img src="https://a0.muscache.com/im/pictures/87296ace-6ad3-48c2-8f62-e6ee5f1328a6.jpg?im_w=1200" alt="Foto 2" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLB(2)"><img src="https://a0.muscache.com/im/pictures/c7e20b58-dbcc-4491-967b-3b095d79af51.jpg?im_w=1200" alt="Foto 3" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLB(3)"><img src="https://a0.muscache.com/im/pictures/f57a8ce2-1a6d-40a0-abff-a83653d9ba62.jpg?im_w=1200" alt="Foto 4" loading="lazy"></div>
+      <div class="gallery-item" onclick="openLB(4)"><img src="https://a0.muscache.com/im/pictures/d63bebbb-ffff-47ab-8a17-57e80aeacf39.jpg?im_w=1200" alt="Foto 5" loading="lazy"></div>
+      <div class="gallery-item gallery-more" onclick="openLB(5)"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTIxMjU4NTA%3D/original/2bdaeab5-bba8-4492-b5fe-33dc913df423.jpeg?im_w=1200" alt="Foto 6" loading="lazy"></div>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <button class="btn btn-secondary" onclick="openLB(0)">📷 Ver todas as fotos (32)</button>
+    </div>
+  </div>
+</section>
+<!-- ACCESS / CHECK-IN -->
+<section id="access">
+  <div class="container">
+    <div class="badge" style="margin-bottom:10px">🔑 Acesso</div>
+    <h2 class="section-title">Como Entrar no Apartamento</h2>
+    <p class="section-subtitle">Siga os passos abaixo para uma chegada tranquila e sem dificuldades</p>
+    <div class="access-grid">
+      <div class="access-steps">
+        <div class="access-step"><div class="step-num">1</div><div class="step-content"><h4>Confirmação da Reserva</h4><p>Após confirmar a reserva, envie ao anfitrião o nome completo, CPF de todos os hóspedes e os dados do veículo (marca, modelo e placa).</p></div></div>
+        <div class="access-step"><div class="step-num">2</div><div class="step-content"><h4>Chegada ao Condomínio</h4><p>Acesse pela entrada principal. A garagem com Monitoramento 24h. Veículos de porte médio têm espaço garantido.</p></div></div>
+        <div class="access-step"><div class="step-num">3</div><div class="step-content"><h4>Acesso pelo Elevador</h4><p>Suba pelo elevador do condomínio até o andar indicado. O apartamento tem entrada privativa.</p></div></div>
+        <div class="access-step"><div class="step-num">4</div><div class="step-content"><h4>Fechadura Digital</h4><p>A porta usa fechadura digital. Assista ao vídeo ao lado para entender como utilizar o código de acesso. Em caso de dúvida, contacte Lucas.</p></div></div>
+        <div class="access-step"><div class="step-num">5</div><div class="step-content"><h4>Checklist de Chegada</h4><p>Confira o apartamento ao entrar. Qualquer avaria deve ser informada ao anfitrião imediatamente para não haver cobranças indevidas.</p></div></div>
+      </div>
+      <div>
+        <div class="access-video-box">
+          <h3>🎬 Ver como entrar no apartamento</h3>
+          <p>Assista ao vídeo explicativo sobre como usar a fechadura digital e acessar o imóvel:</p>
+          <div class="video-wrapper" id="videoWrapper">
+            <iframe src="https://drive.google.com/file/d/1vKm3FmMY5d0b6RGFj2DNmMMNI_N1wTMs/preview" allowfullscreen allow="autoplay"></iframe>
+          </div>
+          <button class="btn-video" onclick="window.open('https://drive.google.com/file/d/1vKm3FmMY5d0b6RGFj2DNmMMNI_N1wTMs/view','_blank')">
+            ▶️ Abrir vídeo em tela cheia
+          </button>
+          <div class="checkin-times">
+            <div class="time-card"><div class="icon">🕒</div><div class="time">15h–20h</div><div class="label">Check-in</div></div>
+            <div class="time-card"><div class="icon">🕙</div><div class="time">8h-11h</div><div class="label">Checkout</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- AMENITIES -->
+<section id="amenities">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="badge" style="margin-bottom:10px">✨ Comodidades</div>
+      <h2 class="section-title">Tudo que Você Precisa</h2>
+      <p class="section-subtitle">45 comodidades organizadas por categoria</p>
+    </div>
+    <div class="amenities-categories">
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#e0f2fe">🌊</div><h3>Vistas & Localização</h3></div>
+        <ul class="amen-list">
+          <li>Vista para o oceano e para a praia</li>
+          <li>Vista para as montanhas</li>
+          <li>Acesso compartilhado à praia</li>
+          <li>Pátio ou varanda privativa</li>
+          <li>Churrasqueira exclusiva</li>
+          <li>2 cadeiras de praia incluídas</li>
+          <li>Chuveiro externo para lavar areia</li>
+        </ul>
+      </div>
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#fef9c3">🍳</div><h3>Cozinha Completa</h3></div>
+        <ul class="amen-list">
+          <li>Geladeira </li>
+          <li>Fogão a gás com forno inox</li>
+          <li>Micro-ondas</li>
+          <li>Cafeteira elétrica</li>
+          <li>Liquidificador e torradeira</li>
+          <li>Assadeira e utensílios de cozinha</li>
+          <li>Taças de vinho</li>
+          <li>Utensílios para churrasco (Apenas espetos)</li>
+          <li>Mesa de jantar para 4 pessoas</li>
+        </ul>
+      </div>
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#f0fdf4">🛏️</div><h3>Quarto & Conforto</h3></div>
+        <ul class="amen-list">
+          <li>Cama de casal + 2 colchões extras</li>
+          <li>Ar-condicionado split central</li>
+          <li>Ventilador de teto (apenas na  unidade 113) </li>
+          <li>Cortinas blackout</li>
+          <li>Guarda-roupa com cabides</li>
+          <li>Ferro de passar + varal</li>
+    
+        </ul>
+      </div>
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#fce7f3">🛁</div><h3>Banheiro</h3></div>
+        <ul class="amen-list">
+          <li>Água quente</li>
+          <li>Secador de cabelo</li>
+          <li>Xampu, condicionador e sabonete (Natury&apos;s)</li>
+          <li>Chuveiro </li>
+          <li><em style="color:#6b7280;font-size:.85rem">⚠️ Hóspede deve trazer toalhas de banho e roupas de cama</em></li>
+        </ul>
+      </div>
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#ede9fe">📺</div><h3>Entretenimento & Internet</h3></div>
+        <ul class="amen-list">
+          <li>TV 32" HD com Netflix e Amazon Prime</li>
+          <li>Wi-Fi de alta velocidade</li>
+          
+        </ul>
+      </div>
+      <div class="amen-card">
+        <div class="amen-card-header"><div class="amen-icon" style="background:#d1fae5">🚗</div><h3>Estacionamento & Acesso</h3></div>
+        <ul class="amen-list">
+          <li>Garagem exclusiva</li>
+          <li>Monitoramento 24 horas</li>
+          <li>Estacionamento gratuito na rua</li>
+          <li>Elevador no condomínio</li>
+          <li>Entrada privativa</li>
+          <li>Estadias longas permitidas (28+ dias)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- RULES ACCORDION -->
+<section id="rules">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="badge" style="margin-bottom:10px">📋 Regras</div>
+      <h2 class="section-title">Regras da Casa</h2>
+      <p class="section-subtitle">Leia com atenção para garantir uma estadia agradável</p>
+    </div>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header active" onclick="toggleAcc(this)">
+          <div class="accordion-title"><span class="accordion-icon">🕒</span>Horários de Check-in e Checkout</div>
+          <span class="accordion-chevron">▼</span>
+        </div>
+        <div class="accordion-body open">
+          <div class="accordion-body-inner">
+            <div class="rule-list">
+              <div class="rule-item"><div class="rule-dot"></div><span><strong>Check-in:</strong> A partir das 15h00 até às 20h00</span></div>
+              <div class="rule-item important"><div class="rule-dot"></div><span><strong>Checkout:</strong> Obrigatório antes das 11h00</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Horários fora desse intervalo devem ser combinados previamente com o anfitrião</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-title"><span class="accordion-icon">👥</span>Hóspedes e Capacidade</div>
+          <span class="accordion-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="rule-list">
+              <div class="rule-item important"><div class="rule-dot"></div><span>Máximo de 4 hóspedes permitidos (Ideal 2 adultos e 2 crianças)</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Fornecer nome completo e CPF de todos os hóspedes após a reserva</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Visitantes externos não são permitidos sem autorização</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-title"><span class="accordion-icon">🚗</span>Veículos e Estacionamento</div>
+          <span class="accordion-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="rule-list">
+              <div class="rule-item"><div class="rule-dot"></div><span>Informar marca, modelo e placa do veículo antes da chegada</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Garagem para veículo de porte médio (monitorada 24h)</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Estacionamento gratuito também disponível na rua</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-title"><span class="accordion-icon">🧺</span>Roupas de Cama e Toalhas</div>
+          <span class="accordion-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="rule-list">
+              <div class="rule-item important"><div class="rule-dot"></div><span>O hóspede deve trazer roupas de cama e toalhas de banho — não são fornecidas</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Para a churrasqueira: somente espetos são fornecidos; carvão e outros itens por conta do hóspede</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Não há guarda-sol; há 2 cadeiras de praia disponíveis</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAcc(this)">
+          <div class="accordion-title"><span class="accordion-icon">🔇</span>Silêncio e Convivência</div>
+          <span class="accordion-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="rule-list">
+              <div class="rule-item important"><div class="rule-dot"></div><span>Silêncio obrigatório a partir das 22h</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Respeitar os outros moradores do condomínio</span></div>
+              <div class="rule-item"><div class="rule-dot"></div><span>Festas e eventos não são permitidos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- INSTRUCTIONS -->
+<section id="instructions">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="badge" style="margin-bottom:10px">ℹ️ Instruções</div>
+      <h2 class="section-title">Informações Importantes</h2>
+      <p class="section-subtitle">Tudo que você precisa saber para uma estadia perfeita</p>
+    </div>
+    <div class="instr-grid">
+      <div class="instr-card">
+        <div class="instr-card-icon">📶</div>
+        <h3>Wi-Fi</h3>
+        <p>Internet Wi-Fi de alta velocidade disponível em todo o apartamento.</p>
+        <div class="wifi-reveal">
+          <div style="margin-top:12px;background:#e0f7fa;border:1px solid var(--ocean-light);border-radius:8px;padding:14px;text-align:center">
+            <div style="font-size:1.3rem;margin-bottom:6px">🔖</div>
+            <div style="font-size:.9rem;font-weight:600;color:var(--ocean-dark);line-height:1.5">Rede e senha atrás da<br>porta de acesso ao apto</div>
+          </div>
+        </div>
+      </div>
+      <div class="instr-card">
+        <div class="instr-card-icon">❄️</div>
+        <h3>Ar-Condicionado</h3>
+        <ul>
+          <li>Split no modo frio ou ventilação</li>
+          <li>Controle remoto disponível no apartamento</li>
+          <li>Ventilador de teto como alternativa econômica (apenas no apto 113)</li>
+          <li>Desligue ao sair do apartamento</li>
+        </ul>
+      </div>
+      <div class="instr-card">
+        <div class="instr-card-icon">🍳</div>
+        <h3>Cozinha</h3>
+        <ul>
+          <li>Fogão a gás — use com cuidado</li>
+          <li>Não deixe louça suja após uso</li>
+          <li>Descarte o lixo nos locais indicados</li>
+          <li>Geladeira disponível para seus alimentos</li>
+        </ul>
+      </div>
+      <div class="instr-card">
+        <div class="instr-card-icon">🏖️</div>
+        <h3>Praia e Varanda</h3>
+        <ul>
+          <li>2 cadeiras de praia disponíveis</li>
+          <li>Chuveiro externo para lavar a areia</li>
+          <li>Churrasqueira na varanda privativa</li>
+          <li>Vista panorâmica do oceano e montanhas</li>
+        </ul>
+      </div>
+      <div class="instr-card">
+        <div class="instr-card-icon">🗑️</div>
+        <h3>Lixo & Organização</h3>
+        <ul>
+          <li>Separe lixo reciclável do orgânico</li>
+          <li>Leve o lixo ao local indicado no condomínio</li>
+          <li>Deixe o apartamento organizado no checkout</li>
+          
+        </ul>
+      </div>
+      <div class="instr-card">
+        <div class="instr-card-icon">🚪</div>
+        <h3>Saída (Checkout)</h3>
+        <ul>
+          <li>Checkout até as 11h00</li>
+          <li>Deixe as chaves/código no local indicado</li>
+          <li>Desligue todas as luzes, AC e eletrodomésticos</li>
+          <li>Feche janelas, portas e portão da varanda</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- LOCAL TIPS -->
+<section id="tips">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="badge" style="margin-bottom:10px;background:rgba(255,255,255,.2)">📍 Dicas Locais</div>
+      <h2 class="section-title">Explore a Região</h2>
+      <p class="section-subtitle">O melhor do Litoral Sul do Paraná a poucos passos de você</p>
+    </div>
+    <div class="tips-grid">
+
+      <!-- MERCADOS -->
+      <div class="tip-card">
+        <div class="tip-card-icon">🛒</div>
+        <h3>Mercados</h3>
+        <p style="line-height:1.9">
+          <strong>Super Mar Costa Azul</strong><br>
+          Av. Paranaguá, 9640 — Costa Azul, Matinhos<br><br>
+          <strong>Supermercado Quintetto</strong><br>
+          R. Dr. A e Cerqueira Lima, 390 — Gaivotas, Matinhos<br><br>
+          <strong>Super Rede Atacadista</strong><br>
+          Av. Marginal, 197 — Praia de Leste, Pontal do PR
+        </p>
+      </div>
+
+      <!-- BARES E RESTAURANTES -->
+      <div class="tip-card">
+        <div class="tip-card-icon">🍽️</div>
+        <h3>Bares & Restaurantes</h3>
+        <p style="line-height:2">
+          <strong>Birutas Bar</strong> — Av. Atlântica 10959, Gaivotas (1 km)<br>
+          <strong>Restaurante 277</strong> — Praia de Leste (4,6 km)<br>
+          <strong>Bora Bora Pizza & Sushi</strong> — Praia de Leste (4,6 km)<br>
+          <strong>Costelão Ipanema</strong> — Praia de Leste (7,1 km)<br>
+          <strong>Labodeguita (Melhor Restaurante do Litoral)</strong> — petiscos e drinks
+        </p>
+      </div>
+
+      <!-- DELIVERY -->
+      <div class="tip-card">
+        <div class="tip-card-icon">🛵</div>
+        <h3>Delivery</h3>
+        <p style="line-height:2">
+          <strong>Almoço</strong><br>
+          Albatroz — <a href="https://wa.me/5541998448454" style="color:var(--ocean-light);font-weight:600">(41) 99844-8454</a><br><br>
+          <strong>Pizza</strong><br>
+          Bila Pizza Express — <a href="https://wa.me/5541996042275" style="color:var(--ocean-light);font-weight:600">(41) 99604-2275</a><br>
+          Gaivotas Restaurante Pizza — <a href="tel:4134531234" style="color:var(--ocean-light);font-weight:600">(41) 3453-1234</a>
+        </p>
+      </div>
+
+      <!-- PRAIAS E DESTINOS -->
+      <div class="tip-card">
+        <div class="tip-card-icon">🌊</div>
+        <h3>Praias & Destinos</h3>
+        <p style="line-height:2">
+          <strong>Praia de Frente</strong> — Balneário Caravelas 🏖️<br>
+          <strong>Praia de Leste</strong> — 5 km<br>
+          <strong>Praia Brava (Caiobá)</strong> — surf — 13 km<br>
+          <strong>Praia Mansa (Caiobá)</strong> — família — 15 km<br>
+          <strong>Pier Ilha do Mel</strong> — passeio de barco — 24 km
+        </p>
+      </div>
+
+      <!-- FAUNA E NATUREZA -->
+      <div class="tip-card">
+        <div class="tip-card-icon">🦉</div>
+        <h3>Natureza & Fauna</h3>
+        <p>Aviste corujas-buraqueiras ao entardecer, gaivotas ao amanhecer e pescadores artesanais saindo ao mar. A natureza é parte do cenário aqui — e é de graça.</p>
+      </div>
+
+      <!-- DICA DO ANFITRIÃO -->
+      <div class="tip-card">
+        <div class="tip-card-icon">💡</div>
+        <h3>Dica do Anfitrião</h3>
+        <p>Se o Wi-Fi cair, retire o cabo atrás do roteador por 10 segundos e recoloque para restabelecer o sinal. Qualquer dúvida, chame o anfitrião ou o Lucas — estamos sempre disponíveis!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="reviews-score">
+        <div class="score">4,97</div>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="count">155 avaliações</div>
+        <div style="margin-top:8px;font-size:.75rem;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px">Preferido dos Hóspedes</div>
+      </div>
+      <div>
+        <div class="badge" style="margin-bottom:10px">💬 Avaliações</div>
+        <h2 class="section-title">O Que os Hóspedes Dizem</h2>
+        <p style="color:var(--gray);font-size:.95rem">Avaliações verificadas de hóspedes reais do Airbnb</p>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">E</div>
+          <div><div class="review-name">Eduardo</div><div class="review-date">Março de 2026</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Apartamento exatamente como nas fotos. Fácil acesso à praia, muito tranquilo na baixa temporada. Voltaríamos com certeza!"</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">L</div>
+          <div><div class="review-name">Leticia</div><div class="review-date">Fevereiro de 2026</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Estrutura ótima, vista maravilhosa para o mar. O apartamento é lindo e muito bem cuidado. Superou as expectativas!"</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">A</div>
+          <div><div class="review-name">Aline Carla</div><div class="review-date">Fevereiro de 2026</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Muito aconchegante e com fácil acesso às praias, supermercados e restaurantes. Lucas foi muito atencioso e prestativo durante toda a estadia."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">T</div>
+          <div><div class="review-name">Thays</div><div class="review-date">Março de 2026</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Exatamente igual às fotos, sem surpresas negativas. Lucas foi muito prestativo, sempre respondeu rápido. Lugar incrível!"</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">C</div>
+          <div><div class="review-name">Claudia Michelli</div><div class="review-date">Janeiro de 2026</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Localização excelente, espaço organizado e conforme descrito. Ótima estadia, recomendo demais para quem busca conforto à beira-mar."</p>
+      </div>
+      <div class="review-card">
+        <div class="review-meta">
+          <div class="review-avatar">I</div>
+          <div><div class="review-name">Isabela</div><div class="review-date">Novembro de 2025</div></div>
+        </div>
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <p class="review-text">"Maravilhoso! Exatamente como nas fotos. Atendimento excelente do anfitrião. A vista para o mar pela varanda é simplesmente deslumbrante."</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://www.airbnb.com.br/rooms/52125850#reviews" target="_blank" class="btn btn-secondary">Ver todas as 155 avaliações no Airbnb</a>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="badge" style="margin-bottom:10px">💬 Contato</div>
+        <h2>Fale com o Anfitrião</h2>
+        <p>Dúvidas, solicitações especiais ou emergências? Gabriel e Lucas estão prontos para ajudar. Respondemos em até 1 hora!</p>
+        <div class="contact-host">
+          <div class="host-avatar">G</div>
+          <div class="host-info">
+            <div class="host-name">Gabriel</div>
+            <div class="host-role">Anfitrião Principal · 4 anos no Airbnb</div>
+            <span class="host-badge">🏆 Superhost</span>
+          </div>
+        </div>
+        <div class="contact-host">
+          <div class="host-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">L</div>
+          <div class="host-info">
+            <div class="host-name">Lucas</div>
+            <div class="host-role">Co-anfitrião · Suporte local</div>
+            <span class="host-badge" style="background:#d1fae5;color:#065f46">✅ Atendimento local</span>
+          </div>
+        </div>
+        <div class="contact-btns">
+          <a href="https://www.airbnb.com.br/rooms/52125850" target="_blank" class="btn btn-primary" style="justify-content:center">🏠 Ver Anúncio no Airbnb</a>
+          <a href="https://wa.me/5541991866122?text=Olá! Tenho uma dúvida sobre o Studio Frente Mar em Matinhos." target="_blank" class="btn btn-whatsapp" style="justify-content:center">💬 WhatsApp +55 (41) 99186-6122  </a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="big-icon">🌊</div>
+        <h3>Pronto para a sua estadia?</h3>
+        <p>Studio de frente para o mar, varanda com churrasqueira, vista panorâmica e toda a estrutura que você precisa para relaxar no Litoral Paranaense.</p>
+        <div class="contact-links">
+          <a href="https://www.airbnb.com.br/rooms/52125850" target="_blank" class="btn btn-primary" style="justify-content:center">Reservar agora no Airbnb</a>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+            <div style="background:var(--gray-light);border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem">⭐</div><div style="font-weight:700;font-size:1.1rem">4,97</div><div style="font-size:.75rem;color:var(--gray)">Avaliação</div></div>
+            <div style="background:var(--gray-light);border-radius:8px;padding:14px;text-align:center"><div style="font-size:1.4rem">💬</div><div style="font-weight:700;font-size:1.1rem">155</div><div style="font-size:.75rem;color:var(--gray)">Avaliações</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">🌊 Studio Frente Mar</div>
+    <div class="footer-links">
+      <a href="#hero">Início</a>
+      <a href="#gallery">Fotos</a>
+      <a href="#access">Acesso</a>
+      <a href="#amenities">Comodidades</a>
+      <a href="#rules">Regras</a>
+      <a href="#instructions">Instruções</a>
+      <a href="#tips">Dicas Locais</a>
+      <a href="#contact">Contato</a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">📍 Avenida Beira Mar, 10.183 · Balneário Caravelas, Matinhos/PR · Anúncio Airbnb #52125850</div>
+  </div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
+<script>
+// ── PHOTO ARRAY (32 photos) ──
+const photos = [
+  'https://a0.muscache.com/im/pictures/hosting/Hosting-52125850/original/795d5294-120d-4224-9f65-f323659b298a.png?im_w=1200',
+  'https://a0.muscache.com/im/pictures/87296ace-6ad3-48c2-8f62-e6ee5f1328a6.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/c7e20b58-dbcc-4491-967b-3b095d79af51.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/f57a8ce2-1a6d-40a0-abff-a83653d9ba62.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/d63bebbb-ffff-47ab-8a17-57e80aeacf39.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTIxMjU4NTA%3D/original/2bdaeab5-bba8-4492-b5fe-33dc913df423.jpeg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/7e7d4964-4f0a-41dd-9fd3-cd5969fc3984.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/123ffe9c-ee87-437c-8e98-c3b36c8bc647.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NTIxMjU4NTA%3D/original/f9302c43-73a8-478b-929c-6d8d6d5e4d00.jpeg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/miso/Hosting-52125850/original/4d1a9f85-b30e-4cda-9aba-1e47791e8b43.jpeg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/miso/Hosting-52125850/original/7c4b3e2d-a1b2-4c3d-8e5f-9d6a7b8c9e0f.jpeg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/hosting/Hosting-52125850/original/795d5294-120d-4224-9f65-f323659b298a.png?im_w=1200',
+  'https://a0.muscache.com/im/pictures/87296ace-6ad3-48c2-8f62-e6ee5f1328a6.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/c7e20b58-dbcc-4491-967b-3b095d79af51.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/f57a8ce2-1a6d-40a0-abff-a83653d9ba62.jpg?im_w=1200',
+  'https://a0.muscache.com/im/pictures/d63bebbb-ffff-47ab-8a17-57e80aeacf39.jpg?im_w=1200'
+];
+let lbIndex = 0;
+
+function openLB(i) {
+  lbIndex = i % photos.length;
+  document.getElementById('lbImg').src = photos[lbIndex];
+  document.getElementById('lbCounter').textContent = (lbIndex+1) + ' / ' + photos.length;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLB() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + photos.length) % photos.length;
+  document.getElementById('lbImg').src = photos[lbIndex];
+  document.getElementById('lbCounter').textContent = (lbIndex+1) + ' / ' + photos.length;
+}
+document.getElementById('lightbox').addEventListener('click', function(e){ if(e.target===this) closeLB(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLB(); if(e.key==='ArrowLeft') lbNav(-1); if(e.key==='ArrowRight') lbNav(1); });
+
+// ── ACCORDION ──
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  const isActive = header.classList.contains('active');
+  document.querySelectorAll('.accordion-header').forEach(h => {
+    h.classList.remove('active');
+    h.nextElementSibling.classList.remove('open');
+  });
+  if (!isActive) { header.classList.add('active'); body.classList.add('open'); }
+}
+
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll', function() {
+  const nb = document.getElementById('navbar');
+  if (window.scrollY > 60) nb.classList.add('scrolled'); else nb.classList.remove('scrolled');
+  const bt = document.getElementById('backToTop');
+  if (window.scrollY > 400) bt.classList.add('visible'); else bt.classList.remove('visible');
+});
+
+// ── MOBILE NAV ──
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+function closeNav() { document.getElementById('navLinks').classList.remove('open'); }
+
+// ── WI-FI REVEAL ──
+function toggleWifi(btn) {
+  const box = btn.nextElementSibling;
+  box.classList.toggle('visible');
+  btn.textContent = box.classList.contains('visible') ? '🙈 Ocultar Wi-Fi' : '👁 Ver dados do Wi-Fi';
+}
+
+// ── VIDEO EMBED (Google Drive) ──
+const DRIVE_FILE_ID = '1vKm3FmMY5d0b6RGFj2DNmMMNI_N1wTMs';
+function loadVideo() {
+  window.open('https://drive.google.com/file/d/' + DRIVE_FILE_ID + '/view', '_blank');
+}
+function promptVideoURL() { loadVideo(); }
+</script>
+</body>
+</html>
